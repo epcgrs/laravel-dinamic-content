@@ -47,7 +47,9 @@ export default {
     props:['titulos','itens','ordem','ordemcol','criar','detalhe','editar','deletar','token'],
     data: function () {
         return {
-            buscar:''
+            buscar:'',
+            ordemAux: this.ordem,
+            ordemAuxCol: this.ordemcol
         }
     },
     methods:{
@@ -55,19 +57,19 @@ export default {
             document.getElementById(index).submit();
         },
         ordenaColuna: function(coluna){
-            this.ordemcol = coluna;
-            if (this.ordem == "asc") {
-                this.ordem = 'desc';
+            this.ordemAuxCol = coluna;
+            if (this.ordemAux == "asc") {
+                this.ordemAux = 'desc';
             } else {
-                this.ordem = 'asc';
+                this.ordemAux = 'asc';
             }
         }
     },
     computed:{
         lista: function(){
 
-            let ordem = this.ordem || "asc";
-            let ordemCol = this.ordemcol || 0;
+            let ordem = this.ordemAux || "asc";
+            let ordemCol = this.ordemAuxCol || 0;
 
             ordem = ordem.toLowerCase();
             ordemCol = parseInt(ordemCol);
