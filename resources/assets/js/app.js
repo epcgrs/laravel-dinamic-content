@@ -5,9 +5,9 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-require('./bootstrap');
+ require('./bootstrap');
 
-window.Vue = require('vue');
+ window.Vue = require('vue');
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -15,12 +15,12 @@ window.Vue = require('vue');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('topo', require('./components/Topo.vue'));
-Vue.component('painel', require('./components/Painel.vue'));
-Vue.component('caixa', require('./components/Caixas.vue'));
-Vue.component('pagina', require('./components/Pagina.vue'));
-Vue.component('tabela-lista', require('./components/TabelaLista.vue'));
+ Vue.component('topo', require('./components/Topo.vue'));
+ Vue.component('painel', require('./components/Painel.vue'));
+ Vue.component('caixa', require('./components/Caixas.vue'));
+ Vue.component('pagina', require('./components/Pagina.vue'));
+ Vue.component('tabela-lista', require('./components/TabelaLista.vue'));
 
-const app = new Vue({
-    el: '#app'
-});
+ const app = new Vue({
+ 	el: '#app'
+ });
