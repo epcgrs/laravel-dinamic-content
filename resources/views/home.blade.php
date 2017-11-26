@@ -3,7 +3,7 @@
 @section('content')
 <pagina tamanho="10">
 	<painel titulo="Dashboard">
-		Teste de Conteúdo....
+		<migalhas v-bind:lista="{{$listaMigalhas}}"></migalhas>
 		<div class="row">
 			<div class="col-md-4">
 				<caixa qtd="80" titulo="Artigos" url="{{route('artigos.index')}}" cor="#e87d1d" icone="ion ion-pie-graph"></caixa>
