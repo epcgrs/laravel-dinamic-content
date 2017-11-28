@@ -44020,6 +44020,7 @@ var render = function() {
                               ? _c("modallink", {
                                   attrs: {
                                     item: item,
+                                    url: _vm.detalhe,
                                     tipo: "link",
                                     nome: "detalhe",
                                     titulo: "Detalhe |",
@@ -44077,6 +44078,7 @@ var render = function() {
                               ? _c("modallink", {
                                   attrs: {
                                     item: item,
+                                    url: _vm.detalhe,
                                     tipo: "link",
                                     nome: "detalhe",
                                     titulo: "Detalhe |",
@@ -44126,6 +44128,7 @@ var render = function() {
                               ? _c("modallink", {
                                   attrs: {
                                     item: item,
+                                    url: _vm.detalhe,
                                     tipo: "link",
                                     nome: "detalhe",
                                     titulo: "Detalhe |",
@@ -44522,10 +44525,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-	props: ['tipo', 'nome', 'titulo', 'css', 'item'],
+	props: ['tipo', 'nome', 'titulo', 'css', 'item', 'url'],
 	methods: {
 		preencheFormulario: function preencheFormulario() {
-			this.$store.commit('setItem', this.item);
+			var _this = this;
+
+			axios.get(this.url + this.item.id).then(function (res) {
+				console.log(res.data);
+				_this.$store.commit('setItem', res.data);
+			});
+			// this.$store.commit('setItem',this.item);
 		}
 	}
 });
