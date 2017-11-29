@@ -12,13 +12,10 @@ in a bash:
 
 2 - run ```npm install ```;
 
-3 - create a file in ```database ``` folder called ```database.sqlite ``` 
+3 - create a file in ```database ``` folder called ```database.sqlite ```
 or create a mysql database and edit ```./config/database.php ```;
 
-4 - create ```.env ``` file and setup;
-
-4.1 - if you using sqlite, set ```DB_DATABASE=C:\xampp\htdocs\laravel-dinamic-content\database\database.sqlite``` 
-in ```.env ``` for an unknown reason only ```database/database.sqlite``` is not working :c ;
+4 - copy ```.env.example ``` file and paste in ```.env ```;
 
 5 - run ```php artisan migrate ```;
 
