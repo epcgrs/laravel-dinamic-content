@@ -1,10 +1,19 @@
-## Laravel com Vue.js
+Laravel com Vue.js
+---------
+
 
 Repositório criado para um curso da Udemy.
 quem se interessou é o curso Laravel com Vue.
 
 as instruções estão em inglês para ficarem mais globalizadas,
 estão em inglês simples, qualquer tradutor online pode traduzir.
+
+> **Requisitos:**
+> - Composer;
+> - Laravel 5.5;
+> - PHP 7.0;
+> - Node 8.1.2;
+
 
 in a bash:
 
