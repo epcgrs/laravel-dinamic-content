@@ -55,6 +55,7 @@
 <modal nome="editar" titulo="Editar">
 
 	<formulario id="formEditar" css="" action="#" method="put" enctype="multipart/form-data" token="12345">
+
 		<div class="form-group">
 			<label for="titulo">Título</label>
 			<input type="text" class="form-control" id="titulo" name="titulo" v-model="$store.state.item.titulo" placeholder="Título">
@@ -63,7 +64,6 @@
 			<label for="descricao">Descição</label>
 			<input type="text" class="form-control" id="descricao" name="descricao" v-model="$store.state.item.descricao" placeholder="Descrição">
 		</div>
-
 
 	</formulario>
 	<span slot="botoes">
