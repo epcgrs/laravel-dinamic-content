@@ -20,7 +20,7 @@
                 <tr v-for="(item,index) in lista">
                     <td v-for="i in item">{{i}}</td>
                     <td v-if="detalhe || editar || deletar">
-                        <form v-bind:id="index" v-if="deletar && token" v-bind:action="deletar" method="post">
+                        <form v-bind:id="index" v-if="deletar && token" v-bind:action="deletar + item.id" method="post">
                             <input type="hidden" name="_method" value="DELETE">
                             <input type="hidden" name="_token" v-bind:value="token">
 
@@ -29,7 +29,7 @@
                             </modallink>
 
                             <a v-if="editar && !modal" v-bind:href="editar"> Editar |</a>
-                            <modallink v-if="editar && modal" v-bind:item="item" tipo="link" nome="editar" titulo=" Editar |" css="">
+                            <modallink v-if="editar && modal" v-bind:item="item" v-bind:url="editar" tipo="link" nome="editar" titulo=" Editar |" css="">
                             </modallink>
 
                             <a href="#" v-on:click="executaForm(index)"> Deletar</a>
@@ -42,7 +42,7 @@
                             </modallink>
 
                             <a v-if="editar && !modal" v-bind:href="editar"> Editar |</a>
-                            <modallink v-if="editar && modal" tipo="link" nome="editar" titulo=" Editar |" css="">
+                            <modallink v-if="editar && modal" tipo="link" v-bind:item="item" v-bind:url="editar" nome="editar" titulo=" Editar |" css="">
                             </modallink>
 
                             <a v-if="deletar" v-bind:href="deletar"> Deletar</a>
@@ -56,7 +56,7 @@
                             </modallink>
 
                             <a v-if="editar && !modal" v-bind:href="editar"> Editar</a>
-                            <modallink v-if="editar && modal" tipo="link" nome="editar" titulo=" Editar |" css="">
+                            <modallink v-if="editar && modal" tipo="link" v-bind:item="item" v-bind:url="editar" nome="editar" titulo=" Editar |" css="">
                             </modallink>
 
                         </span>
@@ -93,6 +93,7 @@ export default {
     computed:{
         lista: function(){
 
+            let lista = this.itens.data;
             let ordem = this.ordemAux || "asc";
             let ordemCol = this.ordemAuxCol || 0;
 
@@ -100,13 +101,13 @@ export default {
             ordemCol = parseInt(ordemCol);
 
             if (ordem == "asc") {
-                this.itens.sort(function(a,b){
+                lista.sort(function(a,b){
                     if(Object.values(a)[ordemCol] > Object.values(b)[ordemCol]){ return 1; }
                     if(Object.values(a)[ordemCol] < Object.values(b)[ordemCol]){ return -1; }
                     return 0;
                 });
             } else {
-                this.itens.sort(function(a,b){
+                lista.sort(function(a,b){
                     if(Object.values(a)[ordemCol] < Object.values(b)[ordemCol]){ return 1; }
                     if(Object.values(a)[ordemCol] > Object.values(b)[ordemCol]){ return -1; }
                     return 0;
@@ -114,7 +115,7 @@ export default {
             }
 
             if(this.buscar){
-                return this.itens.filter(res => {
+                return lista.filter(res => {
                     res = Object.values(res);
                     for (var k = 0; k< res.length; k++ ){
                         if ((res[k] + "").toLowerCase().indexOf(this.buscar.toLowerCase()) >= 0 ) {
@@ -126,7 +127,7 @@ export default {
             }
 
 
-            return this.itens;
+            return lista;
         }
     }
 }

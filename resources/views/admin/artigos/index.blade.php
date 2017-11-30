@@ -21,12 +21,15 @@
 
 		<tabela-lista
 		v-bind:titulos="['#','Título','Descrição','Data']"
-		v-bind:itens="{{$listaArtigos}}"
+		v-bind:itens="{{json_encode($listaArtigos)}}"
 		ordem="desc" ordemcol="1"
-		criar="#criar" detalhe="/admin/artigos/" editar="#criar" deletar="#deletar" token="827891273"
+		criar="#criar" detalhe="/admin/artigos/" editar="/admin/artigos/" deletar="/admin/artigos/" token="{{ csrf_token() }}"
 		modal="sim"
 		>
 	</tabela-lista>
+	<div align="center">
+		{{$listaArtigos}}
+	</div>
 </painel>
 </pagina>
 <modal nome="adicionar" titulo="Adicionar">
@@ -54,7 +57,7 @@
 </modal>
 <modal nome="editar" titulo="Editar">
 
-	<formulario id="formEditar" css="" action="#" method="put" enctype="multipart/form-data" token="12345">
+	<formulario id="formEditar" v-bind:action="'artigos/'+$store.state.item.id" method="put" enctype="" token="{{ csrf_token() }}">
 
 		<div class="form-group">
 			<label for="titulo">Título</label>
@@ -63,6 +66,14 @@
 		<div class="form-group">
 			<label for="descricao">Descição</label>
 			<input type="text" class="form-control" id="descricao" name="descricao" v-model="$store.state.item.descricao" placeholder="Descrição">
+		</div>
+		<div class="form-group">
+			<label for="conteudo">Conteudo</label>
+			<textarea name="conteudo" id="conteudo" class="form-control" v-model="$store.state.item.conteudo"></textarea>
+		</div>
+		<div class="form-group">
+			<label for="data">Data</label>
+			<input type="datetime-local" class="form-control" id="data" name="data" v-model="$store.state.item.data">
 		</div>
 
 	</formulario>
