@@ -9,7 +9,7 @@
 				<caixa qtd="80" titulo="Artigos" url="{{route('artigos.index')}}" cor="#03ee23" icone="ion ion-pie-graph"></caixa>
 			</div>
 			<div class="col-md-4">
-				<caixa qtd="1800" titulo="Usuarios" url="#" cor="blue" icone="ion ion-person-add"></caixa>
+				<caixa qtd="1800" titulo="Usuarios" url="{{route('usuarios.index')}}" cor="blue" icone="ion ion-person-add"></caixa>
 			</div>
 			<div class="col-md-4">
 				<caixa qtd="25" titulo="Autores" url="#" cor="red" icone="ion ion-edit"></caixa>
