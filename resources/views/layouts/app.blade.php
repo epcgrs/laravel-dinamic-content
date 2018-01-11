@@ -14,39 +14,42 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
-    <div id="app" style="display: none">
+    <div id="app" style="display:none">
 
-        <topo titulo="{{ config('app.name', 'Laravel') }}" url="{{ url('/') }}">
-            @guest
+      <topo titulo="{{ config('app.name', 'Laravel') }}" url="{{ url('/') }}">
+
+        <!-- Authentication Links -->
+        @guest
             <li><a href="{{ route('login') }}">Login</a></li>
             <li><a href="{{ route('register') }}">Register</a></li>
-            @else
+        @else
             <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                     {{ Auth::user()->name }} <span class="caret"></span>
                 </a>
 
-                <ul class="dropdown-menu">
+                <ul class="dropdown-menu" role="menu">
                     <li>
                         <a href="{{ route('logout') }}"
-                        onclick="event.preventDefault();
-                        document.getElementById('logout-form').submit();">
-                        Logout
-                    </a>
+                            onclick="event.preventDefault();
+                                     document.getElementById('logout-form').submit();">
+                            Logout
+                        </a>
 
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                        {{ csrf_field() }}
-                    </form>
-                </li>
-            </ul>
-        </li>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            {{ csrf_field() }}
+                        </form>
+                    </li>
+                </ul>
+            </li>
         @endguest
-    </topo>
 
-    @yield('content')
-</div>
+      </topo>
 
-<!-- Scripts -->
-<script src="{{ asset('js/app.js') }}"></script>
+        @yield('content')
+    </div>
+
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}"></script>
 </body>
 </html>

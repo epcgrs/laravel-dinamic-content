@@ -12,4 +12,8 @@ class Artigo extends Model
     protected $fillable = ['titulo','descricao','conteudo','data'];
 
     protected $dates = ['deleted_at'];
+
+    public function user(){
+    	return $this->belongsTo('App\User');
+    }
 }
