@@ -19,7 +19,7 @@ class ArtigosController extends Controller
     public function index()
     {
         $listaMigalhas = json_encode([
-          ["titulo"=>"Home","url"=>route('home')],
+          ["titulo"=>"Admin","url"=>route('admin')],
           ["titulo"=>"Lista de artigos","url"=>""]
         ]);
 
@@ -31,11 +31,13 @@ class ArtigosController extends Controller
         // }
 
 
-        $listaArtigos = DB::table('artigos')
-        ->join('users','users.id','=','artigos.user_id')
-        ->select('artigos.id','artigos.titulo','artigos.descricao','users.name','artigos.data')
-        ->whereNull('deleted_at')
-        ->paginate(5);
+        // $listaArtigos = DB::table('artigos')
+        // ->join('users','users.id','=','artigos.user_id')
+        // ->select('artigos.id','artigos.titulo','artigos.descricao','users.name','artigos.data')
+        // ->whereNull('deleted_at')
+        // ->paginate(5);
+
+        $listaArtigos = Artigo::listaArtigos(5);
 
         return view('admin.artigos.index',compact('listaMigalhas','listaArtigos'));
     }
