@@ -3,7 +3,7 @@
 		<div class="thumbnail">
 			<img src="https://getuikit.com/v2/docs/images/placeholder_600x400.svg" alt="thumbnail">
 			<div class="caption">
-				<small>{{data}} - {{autor}}</small>
+				<small>{{data | formataData}} - {{autor}}</small>
 				<h3>{{titulo}}</h3>
 				<p>{{descricao}}</p>
 				<p><a :href="link" class="btn btn-primary" role="button">Leia mais</a></p>
@@ -14,6 +14,14 @@
 
 <script>
 export default {
-	props: [ 'titulo', 'descricao','link','imagem','data','autor','sm','md' ]
+	props: [ 'titulo', 'descricao','link','imagem','data','autor','sm','md' ],
+	filters: {
+		formataData: function(valor){
+			if (!valor) return '';
+			valor = valor.toString();
+			valor = valor.split('-');
+			return valor[2]+'/'+valor[1]+'/'+valor[0];
+		}
+	}
 }
 </script>
