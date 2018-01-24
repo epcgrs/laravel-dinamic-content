@@ -28,3 +28,23 @@
 .customsearch:focus {
 	width: 100%;
 }
+
+.blog-container {
+	padding: 20px 60px;
+	.blog-image {
+		margin-bottom: 40px;
+		img {
+			width: 500px;
+			height: auto;
+			margin: auto;
+		}
+	}
+	p {
+		text-indent: 30px;
+	}
+}
+@media only screen and (max-width: 580px) {
+	.blog-container {
+		padding: 20px 20px;
+	}
+}

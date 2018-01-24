@@ -18,7 +18,7 @@ Route::get('/', function (Request $req) {
 
 	if (isset($req->busca) && $req->busca != "") {
 		$busca = $req->busca ;
-		$lista = Artigo::listaArtigosSite(3, $busca);
+		$lista = Artigo::listaArtigosSite(6, $busca);
 
 		// Artigo::orWhere('titulo', 'like', '%'.$busca.'%')
 		// ->orWhere('descricao', 'like', '%'.$busca.'%')
@@ -26,7 +26,7 @@ Route::get('/', function (Request $req) {
 		//busca no db
 
 	} else {
-		$lista = Artigo::listaArtigosSite(3);
+		$lista = Artigo::listaArtigosSite(6);
 		$busca = "" ;
 	}
 
