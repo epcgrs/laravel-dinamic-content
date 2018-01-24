@@ -21,15 +21,14 @@ in a bash:
 
 2 - run ```npm install ```;
 
-3 - create a file in ```./database ``` folder called ```database.sqlite ```
-or create a mysql database and edit ```./config/database.php ```;
+3 - rename ```.env.example ``` file to ```.env ```;
 
-4 - rename ```.env.example ``` file to ```.env ```;
+4 - run ```php artisan migrate ```;
 
-5 - run ```php artisan migrate ```;
+5 - run ```php artisan key:generate ```;
 
-6 - run ```php artisan key:generate ```;
+6 - well done! run ```php artisan serve ```;
 
-7 - well done! run ```php artisan serve ```;
+7 - for vue js or anyone sass or js file changes run ```npm run watch ```;
 
-8 - for vue js or anyone sass or js file changes run ```npm run watch ```;
+observation: I am using sqlite the file is in ```.\database\database.sqlite ```
