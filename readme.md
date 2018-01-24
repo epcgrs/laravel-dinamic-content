@@ -21,10 +21,10 @@ in a bash:
 
 2 - run ```npm install ```;
 
-3 - create a file in ```database ``` folder called ```database.sqlite ```
+3 - create a file in ```./database ``` folder called ```database.sqlite ```
 or create a mysql database and edit ```./config/database.php ```;
 
-4 - copy ```.env.example ``` file and paste in ```.env ```;
+4 - rename ```.env.example ``` file to ```.env ```;
 
 5 - run ```php artisan migrate ```;
 
