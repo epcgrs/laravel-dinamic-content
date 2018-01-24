@@ -29,6 +29,6 @@ in a bash:
 
 6 - well done! run ```php artisan serve ```;
 
-7 - for vue js or anyone sass or js file changes run ```npm run watch ```;
+7 - for vue js or any sass or js file changes run ```npm run watch ```;
 
 observation: I am using sqlite the file is in ```.\database\database.sqlite ```
