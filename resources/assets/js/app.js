@@ -47,6 +47,13 @@ Vue.component('artigocard', require('./components/ArtigoCard.vue'));
 
 const app = new Vue({
     el: '#app',
+    http: {
+      headers: {
+        common: {
+          'X-CSRF-TOKEN': document.head.querySelector('meta[name="csrf-token"]').content
+        }
+      }
+    },
     store,
     mounted(){
       console.log("ok");
