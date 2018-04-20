@@ -12,9 +12,9 @@ quem se interessou é o curso Laravel com Vue.
 
 in a bash:
 
-1 - ```composer install ```;
-2 - ```npm install ```;
-3 - ```cp .env.example .env ```;
-4 - ```php artisan key:generate ```;
-5 - ```php artisan serve ```;
+1 - ```composer install ```;<br>
+2 - ```npm install ```;<br>
+3 - ```cp .env.example .env ```;<br>
+4 - ```php artisan key:generate ```;<br>
+5 - ```php artisan serve ```;<br>
 6 - for js, vue or sass changes, run ```npm run watch ```;
