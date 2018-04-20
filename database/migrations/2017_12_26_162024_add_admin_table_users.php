@@ -14,7 +14,7 @@ class AddAdminTableUsers extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-              $table->enum('admin',['N','S'])->default('N');
+            $table->enum('admin',['N','S'])->default('N');
         });
     }
 

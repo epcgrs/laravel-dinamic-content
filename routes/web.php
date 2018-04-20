@@ -1,8 +1,6 @@
 <?php
-
 use App\Artigo;
 use Illuminate\Http\Request;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,44 +14,38 @@ use Illuminate\Http\Request;
 
 Route::get('/', function (Request $req) {
 
-	if (isset($req->busca) && $req->busca != "") {
-		$busca = $req->busca ;
-		$lista = Artigo::listaArtigosSite(6, $busca);
+    if(isset($req->busca) && $req->busca != ""){
+      $busca = $req->busca;
+      $lista = Artigo::listaArtigosSite(3,$busca);
 
-		// Artigo::orWhere('titulo', 'like', '%'.$busca.'%')
-		// ->orWhere('descricao', 'like', '%'.$busca.'%')
-		// ->paginate(3);
-		//busca no db
+      // busca
+    }else{
+      $lista = Artigo::listaArtigosSite(3);
+      $busca = "";
+    }
 
-	} else {
-		$lista = Artigo::listaArtigosSite(6);
-		$busca = "" ;
-	}
-
-	
     return view('site',compact('lista','busca'));
 })->name('site');
 
 Route::get('/artigo/{id}/{titulo?}', function ($id) {
-	$artigo = Artigo::find($id);
-	if ($artigo) {
-		 return view('artigo',compact('artigo'));
-	}
+    $artigo = Artigo::find($id);
+    if($artigo){
+      return view('artigo',compact('artigo'));
+    }
 
-	return redirect()->route('site');
-   
+    return redirect()->route('site');
+
 })->name('artigo');
 
 Auth::routes();
 
-Route::get('/admin', 'AdminController@index')->name('admin')->middleware('can:eAutor');
+Route::get('/admin', 'AdminController@index')->name('admin')->middleware('can:autor');
 
 Route::middleware(['auth'])->prefix('admin')->namespace('Admin')->group(function(){
 
-  Route::resource('artigos', 'ArtigosController')->middleware('can:eAutor');
+  Route::resource('artigos', 'ArtigosController')->middleware('can:autor');
   Route::resource('usuarios', 'UsuariosController')->middleware('can:eAdmin');
   Route::resource('autores', 'AutoresController')->middleware('can:eAdmin');
   Route::resource('adm', 'AdminController')->middleware('can:eAdmin');
-
 
 });

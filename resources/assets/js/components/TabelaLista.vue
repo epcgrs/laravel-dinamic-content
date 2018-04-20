@@ -1,10 +1,11 @@
 <template>
-  <div>    
+  <div>
+
     <div class="form-inline">
       <a v-if="criar && !modal" v-bind:href="criar">Criar</a>
       <modallink v-if="criar && modal" tipo="link" nome="adicionar" titulo="Criar" css=""></modallink>
       <div class="form-group pull-right">
-        <input type="search" class="form-control" placeholder="Buscar" v-model="buscar" @keydown="lista">
+        <input type="search" class="form-control" placeholder="Buscar" v-model="buscar" >
       </div>
     </div>
 
@@ -17,14 +18,9 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(item,index) in listaData">
+        <tr v-for="(item,index) in lista">
+          <td v-for="i in item">{{i | formataData}}</td>
 
-          <td>{{item.id}}</td>
-          <td>{{item.titulo}}</td>
-          <td>{{item.descricao}}</td>
-          <td>{{item.user.name}}</td>
-          <td>{{item.data | formataData }}</td>
-        
           <td v-if="detalhe || editar || deletar">
             <form v-bind:id="index" v-if="deletar && token" v-bind:action="deletar + item.id" method="post">
               <input type="hidden" name="_method" value="DELETE">
@@ -72,9 +68,8 @@
 <script>
     export default {
       props:['titulos','itens','ordem','ordemcol','criar','detalhe','editar','deletar','token','modal'],
-      data(){
+      data: function(){
         return {
-          listaData: [],
           buscar:'',
           ordemAux: this.ordem || "asc",
           ordemAuxCol: this.ordemcol || 0
@@ -91,8 +86,22 @@
           }else{
             this.ordemAux = 'asc';
           }
-        },
-        lista(){
+        }
+      },
+      filters: {
+        formataData: function(valor){
+          if(!valor) return '';
+          valor = valor.toString();
+          if(valor.split('-').length == 3){
+            valor = valor.split('-');
+            return valor[2] + '/' + valor[1]+ '/' + valor[0];
+          }
+
+          return valor;
+        }
+      },
+      computed:{
+        lista:function(){
           let lista = this.itens.data;
           let ordem = this.ordemAux;
           let ordemCol = this.ordemAuxCol;
@@ -113,8 +122,8 @@
             });
           }
 
-          if(this.buscar){           
-            this.listaData =  lista.filter(res => {
+          if(this.buscar){
+            return lista.filter(res => {
               res = Object.values(res);
               for(let k = 0;k < res.length; k++){
                 if((res[k] + "").toLowerCase().indexOf(this.buscar.toLowerCase()) >= 0){
@@ -122,28 +131,13 @@
                 }
               }
               return false;
+
             });
-          }else{
-            this.listaData = lista;            
           }
-        },        
-      },
-      filters: {
-          formataData: function(valor){
-            if (!valor) return '';
-            valor = valor.toString();
-            if (valor.split('-').length == 3) {
-              valor = valor.split('-');
-              return valor[2]+'/'+valor[1]+'/'+valor[0];
-            }
-            return valor;
-          }
-      },
-      mounted(){
-        this.lista();    
-      },
-      computed:{
-        //Todo
+
+
+          return lista;
+        }
       }
     }
 </script>

@@ -9,7 +9,6 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 import Vuex from 'Vuex';
-import ckeditor from 'vue-ckeditor2';
 Vue.use(Vuex);
 
 /**
@@ -41,26 +40,14 @@ Vue.component('migalhas', require('./components/Migalhas.vue'));
 Vue.component('modal', require('./components/modal/Modal.vue'));
 Vue.component('modallink', require('./components/modal/ModalLink.vue'));
 Vue.component('formulario', require('./components/Formulario.vue'));
-// Vue.component('ckeditor', require('vue-ckeditor2'));
+Vue.component('ckeditor', require('vue-ckeditor2'));
 Vue.component('artigocard', require('./components/ArtigoCard.vue'));
-
 
 const app = new Vue({
     el: '#app',
-    http: {
-      headers: {
-        common: {
-          'X-CSRF-TOKEN': document.head.querySelector('meta[name="csrf-token"]').content
-        }
-      }
-    },
     store,
-    mounted(){
+    mounted: function(){
       console.log("ok");
       document.getElementById('app').style.display = "block";
-    },
-    components: {
-      ckeditor,
     }
-
 });

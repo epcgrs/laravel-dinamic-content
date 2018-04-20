@@ -12,7 +12,6 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-
 </head>
 <body>
     <div id="app" style="display:none">
@@ -30,11 +29,13 @@
                 </a>
 
                 <ul class="dropdown-menu" role="menu">
-                    @can('eAutor')
+                  @can('autor')
                     <li>
-                        <a href="{{route('admin')}}">Admin</a>
+                      <a href="{{route('admin')}}">Admin</a>
                     </li>
-                    @endcan
+                  @endcan
+
+
                     <li>
                         <a href="{{ route('logout') }}"
                             onclick="event.preventDefault();

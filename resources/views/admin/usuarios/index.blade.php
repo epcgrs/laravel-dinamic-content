@@ -13,13 +13,14 @@
     @endif
 
     <painel titulo="Lista de Usuários">
-      <migalhas v-bind:lista="{{$listaMigalhas}}"></migalhas>      
+      <migalhas v-bind:lista="{{$listaMigalhas}}"></migalhas>
+
 
       <tabela-lista
       v-bind:titulos="['#','Nome','E-mail']"
-      v-bind:itens="{{$listaModelo->toJson()}}"
+      v-bind:itens="{{json_encode($listaModelo)}}"
       ordem="desc" ordemcol="1"
-      criar="#criar" detalhe="/admin/usuarios/" editar="/admin/usuarios/" deletar="/admin/usuarios/" 
+      criar="#criar" detalhe="/admin/usuarios/" editar="/admin/usuarios/" deletar="/admin/usuarios/" token="{{ csrf_token() }}"
       modal="sim"
 
       ></tabela-lista>

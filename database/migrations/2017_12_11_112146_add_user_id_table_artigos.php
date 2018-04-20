@@ -13,10 +13,10 @@ class AddUserIdTableArtigos extends Migration
      */
     public function up()
     {
-        Schema::table('artigos', function (Blueprint $table) {
-            $table->integer('user_id')->unsigned()->default(1);
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-        });
+      Schema::table('artigos', function (Blueprint $table) {
+          $table->integer('user_id')->unsigned()->default(1);
+          $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+      });
     }
 
     /**
@@ -26,9 +26,9 @@ class AddUserIdTableArtigos extends Migration
      */
     public function down()
     {
-         Schema::table('artigos', function (Blueprint $table) {
-            $table->dropForeign(['user_id']);
-            $table->dropColumn('user_id');
-        });
+      Schema::table('artigos', function (Blueprint $table) {
+          $table->dropForeign(['user_id']);
+          $table->dropColumn('user_id');
+      });
     }
 }

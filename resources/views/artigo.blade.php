@@ -1,26 +1,20 @@
 @extends('layouts.app')
 
 @section('content')
-<pagina tamanho="12">
-	<painel>
-		<h2 align="center">{{$artigo->titulo}}</h2>
-		<h4 align="center">{{$artigo->descricao}}</h4>
-		<div class="blog-container">
+  <pagina tamanho="12">
+    <painel>
 
-			<div class="blog-image">
-				<img  class="img-responsive" src="https://getuikit.com/v2/docs/images/placeholder_600x400.svg" alt="thumbnail">
-			</div>
-			<div>
-				<p>
-					{!!$artigo->conteudo!!}
-				</p>
-			</div>
+      <h2 align="center">{{$artigo->titulo}}</h2>
+      <h4 align="center">{{$artigo->descricao}}</h4>
+      <p>
+        {!!$artigo->conteudo!!}
+      </p>
+      <p align="center">
+        <small>Por: {{$artigo->user->name}} - {{date('d/m/Y',strtotime($artigo->data))}}</small>
 
-			
-		</div>
-		
-		<p align="center"><small>{{$artigo->user->name}} - {{date('d/m/Y',strToTime($artigo->data))}}</small></p>
-		
-	</painel>
-</pagina>
+      </p>
+
+
+    </painel>
+  </pagina>
 @endsection

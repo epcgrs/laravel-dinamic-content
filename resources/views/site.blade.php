@@ -1,51 +1,37 @@
 @extends('layouts.app')
 
 @section('content')
-<pagina tamanho="12">
-	<painel titulo="Artigos">
+  <pagina tamanho="12">
+    <painel titulo="Artigos">
 
-		@if (!Auth::check())
+      <p>
+        <form class="form-inline text-center" action="{{route('site')}}" method="get" >
+          <input type="search" class="form-control" name="busca" placeholder="Buscar" value="{{isset($busca) ? $busca : ""}}">
+          <button class="btn btn-info">Buscar</button>
+        </form>
 
+      </p>
 
-		<h2 class="text-center">Registre-se ou faça Login para visualizar os artigos</h2>
+      <div class="row">
+        @foreach ($lista as $key => $value)
+          <artigocard
+          titulo="{{str_limit($value->titulo,25,"...")}}"
+          descricao="{{str_limit($value->descricao,40,"...")}}"
+          link="{{route('artigo',[$value->id,str_slug($value->titulo)])}}"
+          imagem="https://coletiva.net/files/e4da3b7fbbce2345d7772b0674a318d5/midia_foto/20170713/118815-maior_artigo_jul17.jpg"
+          data="{{$value->data}}"
+          autor="{{$value->autor}}"
+          sm="6"
+          md="4">
+          </artigocard>
+        @endforeach
 
+      </div>
 
+      <div align="center">
+        {{$lista}}
+      </div>
 
-		@else
-
-
-		<p>
-			<form action="{{route('site')}}" class="form-inline text-left" method="GET">
-				<input type="search" class="customsearch" name="busca" placeholder="Buscar Artigos" value="{{($busca) ? $busca : ""}}">
-			</form>
-		</p>
-
-
-		<div class="row">
-
-
-			@foreach ($lista as $key => $value)
-
-			<artigocard 
-			titulo="{{str_limit($value->titulo, 25, '...')}}"
-			descricao="{{str_limit($value->descricao, 40, '...')}}"
-			link="{{route('artigo',[$value->id, str_slug($value->titulo)])}}"
-			imagem="https://getuikit.com/v2/docs/images/placeholder_600x400.svg"
-			data="{{$value->data}}"
-			autor="{{$value->autor}}"
-			sm="6"
-			md="4" >
-		</artigocard>	
-
-		@endforeach
-
-	</div>
-	<div align="center">
-		{{$lista}}
-	</div>
-
-	@endif
-
-</painel>
-</pagina>
+    </painel>
+  </pagina>
 @endsection

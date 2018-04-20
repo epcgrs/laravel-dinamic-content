@@ -4,20 +4,12 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+
 use App\Artigo;
 use Illuminate\Support\Facades\DB;
-use \App\Repositories\ArtigoRepository;
 
 class ArtigosController extends Controller
 {
-
-    protected $repository;
-
-    public function __construct ()
-    {
-        $this->repository = new ArtigoRepository();
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -28,8 +20,26 @@ class ArtigosController extends Controller
         $listaMigalhas = json_encode([
           ["titulo"=>"Admin","url"=>route('admin')],
           ["titulo"=>"Lista de artigos","url"=>""]
-        ]);        
-        $listaArtigos = $this->repository->listaArtigos();
+        ]);
+        /*
+        $listaArtigos = Artigo::select('id','titulo','descricao','user_id','data')->paginate(5);
+
+        foreach ($listaArtigos as $key => $value) {
+          $value->user_id = \App\User::find($value->user_id)->name;
+          //$value->user_id = $value->user->name;
+          unset($value->user);
+        }
+
+
+        $listaArtigos = DB::table('artigos')
+                        ->join('users','users.id','=','artigos.user_id')
+                        ->select('artigos.id','artigos.titulo','artigos.descricao','users.name','artigos.data')
+                        ->whereNull('deleted_at')
+                        ->paginate(5);
+        */
+
+        $listaArtigos = Artigo::listaArtigos(5);
+
         return view('admin.artigos.index',compact('listaMigalhas','listaArtigos'));
     }
 
@@ -62,8 +72,10 @@ class ArtigosController extends Controller
         if($validacao->fails()){
           return redirect()->back()->withErrors($validacao)->withInput();
         }
+        $user = auth()->user();
 
-        Artigo::create($data);
+        $user->artigos()->create($data);
+
         return redirect()->back();
     }
 
@@ -109,8 +121,8 @@ class ArtigosController extends Controller
       if($validacao->fails()){
         return redirect()->back()->withErrors($validacao)->withInput();
       }
-
-      Artigo::find($id)->update($data);
+      $user = auth()->user();
+      $user->artigos()->find($id)->update($data);
       return redirect()->back();
     }
 
