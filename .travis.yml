@@ -8,7 +8,7 @@ php:
 before_install:
   - cp .env.example .env
   - composer self-update
-  - php artisan key:generate
 
 install:
-- composer install
+  - php artisan key:generate
+  - composer install
