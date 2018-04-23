@@ -1,14 +1,15 @@
 language: php
-sudo: false
-dist: trusty
 
 php:
-  - 7.1
+  - "7.1"
 
-before_install:
-  - cp .env.example .env
+before_script:
+  - cp .env.travis .env
+  - mysql -e 'create database homestead_test;'
   - composer self-update
-
-install:
+  - composer install --no-interaction
   - php artisan key:generate
-  - composer install
+  - php artisan migrate
+
+script:
+- vendor/bin/phpunit
