@@ -6,7 +6,9 @@ php:
   - 7.1
 
 before_install:
+  - cp .env.example .env
   - composer self-update
+  - php artisan key:generate
 
 install:
 - composer install
